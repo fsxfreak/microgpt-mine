@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(ModernApp VERSION 1.0 LANGUAGES CXX)
+project(micrograd-mine VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -10,3 +10,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
 add_executable(${PROJECT_NAME} src/main.cpp)
+
+# Find the packages that vcpkg just built for us
+find_package(fmt CONFIG REQUIRED)
+find_package(nlohmann_json CONFIG REQUIRED)
+
+# Link them to your executable
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+    fmt::fmt 
+    nlohmann_json::nlohmann_json
+)
+
