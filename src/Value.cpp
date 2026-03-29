@@ -1,6 +1,7 @@
 #include "Value.hpp"
 
 #include <cassert>
+#include <fmt/base.h>
 #include <ranges>
 #include <unordered_set>
 
@@ -12,7 +13,7 @@ Value::Value(double data, std::vector<std::shared_ptr<Value>> children,
 
 void Value::backward() {
   std::vector<std::shared_ptr<Value>> topo;
-  std::unordered_set<std::shared_ptr<Value>> visited;
+  std::unordered_set<std::shared_ptr<Value>, ValuePtrHash> visited;
   build_topo(shared_from_this(), topo, visited);
 
   grad = 1.0;
@@ -28,9 +29,9 @@ void Value::backward() {
   }
 }
 
-void Value::build_topo(const std::shared_ptr<Value> &v,
-                       std::vector<std::shared_ptr<Value>> &topo,
-                       std::unordered_set<std::shared_ptr<Value>> &visited) {
+void Value::build_topo(
+    const std::shared_ptr<Value> &v, std::vector<std::shared_ptr<Value>> &topo,
+    std::unordered_set<std::shared_ptr<Value>, ValuePtrHash> &visited) {
   if (visited.contains(v)) {
     return;
   }
@@ -90,4 +91,13 @@ std::shared_ptr<Value> Value::relu() {
 }
 
 std::shared_ptr<Value> Value::neg() { return mul(-1.0); }
+
+void Value::debug_print(int tabs) const {
+  std::string tab_str(tabs, '\t');
+
+  fmt::print("{}d:{}, g:{}\n", tab_str, data, grad);
+  for (const auto &c : children) {
+    c->debug_print(tabs + 1);
+  }
+}
 } // namespace mg
