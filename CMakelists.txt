@@ -9,7 +9,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(
+    ${PROJECT_NAME}
+    src/main.cpp
+    src/Value.cpp
+    src/Helpers.cpp
+)
+
+target_include_directories(${PROJECT_NAME} PRIVATE include)
 
 # Find the packages that vcpkg just built for us
 find_package(fmt CONFIG REQUIRED)
