@@ -7,24 +7,29 @@ set(CMAKE_CXX_EXTENSIONS OFF) # Disables compiler-specific hacks
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+find_package(fmt CONFIG REQUIRED)
+find_package(catch2 CONFIG REQUIRED)
+
 add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
-add_executable(
-    ${PROJECT_NAME}
-    src/main.cpp
-    src/Value.cpp
-    src/Helpers.cpp
+# internal lib
+add_library(micrograd_engine src/Value.cpp src/Helpers.cpp)
+
+target_include_directories(micrograd_engine PUBLIC include)
+target_link_libraries(micrograd_engine PUBLIC fmt::fmt)
+
+# main executable 
+add_executable(${PROJECT_NAME} src/main.cpp)
+target_link_libraries(${PROJECT_NAME} PRIVATE micrograd_engine)
+
+# tests
+enable_testing()
+add_executable(micrograd_tests tests/test_value.cpp)
+target_compile_options(micrograd_tests PRIVATE -Wno-c2y-extensions)
+target_link_libraries(micrograd_tests PRIVATE
+    micrograd_engine
+    Catch2::Catch2WithMain
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE include)
-
-# Find the packages that vcpkg just built for us
-find_package(fmt CONFIG REQUIRED)
-find_package(nlohmann_json CONFIG REQUIRED)
-
-# Link them to your executable
-target_link_libraries(${PROJECT_NAME} PRIVATE 
-    fmt::fmt 
-    nlohmann_json::nlohmann_json
-)
-
+include(Catch)
+catch_discover_tests(micrograd_tests)
