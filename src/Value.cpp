@@ -5,7 +5,7 @@
 #include <ranges>
 #include <unordered_set>
 
-namespace mg {
+namespace lmg {
 Value::Value(double data, std::vector<std::shared_ptr<Value>> children,
              std::vector<double> local_grads)
     : data(data), grad(0), children(std::move(children)),
@@ -95,9 +95,9 @@ std::shared_ptr<Value> Value::neg() { return mul(-1.0); }
 void Value::debug_print(int tabs) const {
   std::string tab_str(tabs, '\t');
 
-  fmt::print("{}d:{}, g:{}\n", tab_str, data, grad);
+  fmt::println("{}d:{}, g:{}", tab_str, data, grad);
   for (const auto &c : children) {
     c->debug_print(tabs + 1);
   }
 }
-} // namespace mg
+} // namespace lmg

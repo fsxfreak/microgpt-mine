@@ -2,8 +2,8 @@
 #include <catch2/catch_test_macros.hpp>
 
 TEST_CASE("Value math works correctly", "[math]") {
-  auto a = std::make_shared<mg::Value>(2.0);
-  auto b = std::make_shared<mg::Value>(3.0);
+  auto a = std::make_shared<lmg::Value>(2.0);
+  auto b = std::make_shared<lmg::Value>(3.0);
 
   SECTION("Value + Value") {
     auto c = a + b;

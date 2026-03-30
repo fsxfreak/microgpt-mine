@@ -4,7 +4,7 @@
 #include <unordered_set>
 #include <vector>
 
-namespace mg {
+namespace lmg {
 
 struct ValuePtrHash;
 
@@ -31,7 +31,7 @@ public:
 
   inline double getData() const { return data; }
   inline double getGrad() const { return grad; }
-  inline const std::vector<std::shared_ptr<Value>> &getChildren() const {
+  inline const std::vector<std::shared_ptr<Value>> &get_children() const {
     return children;
   }
 
@@ -101,4 +101,4 @@ struct ValuePtrHash {
   }
 };
 
-} // namespace mg
+} // namespace lmg

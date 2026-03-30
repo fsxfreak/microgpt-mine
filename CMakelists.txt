@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(micrograd-mine VERSION 1.0 LANGUAGES CXX)
+project(microgpt-mine VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -13,23 +13,23 @@ find_package(catch2 CONFIG REQUIRED)
 add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
 # internal lib
-add_library(micrograd_engine src/Value.cpp src/Helpers.cpp)
+add_library(microgpt_engine src/Value.cpp src/Helpers.cpp src/Model.cpp)
 
-target_include_directories(micrograd_engine PUBLIC include)
-target_link_libraries(micrograd_engine PUBLIC fmt::fmt)
+target_include_directories(microgpt_engine PUBLIC include)
+target_link_libraries(microgpt_engine PUBLIC fmt::fmt)
 
 # main executable 
 add_executable(${PROJECT_NAME} src/main.cpp)
-target_link_libraries(${PROJECT_NAME} PRIVATE micrograd_engine)
+target_link_libraries(${PROJECT_NAME} PRIVATE microgpt_engine)
 
 # tests
 enable_testing()
-add_executable(micrograd_tests tests/test_value.cpp)
-target_compile_options(micrograd_tests PRIVATE -Wno-c2y-extensions)
-target_link_libraries(micrograd_tests PRIVATE
-    micrograd_engine
+add_executable(microgpt_tests tests/test_value.cpp)
+target_compile_options(microgpt_tests PRIVATE -Wno-c2y-extensions)
+target_link_libraries(microgpt_tests PRIVATE
+    microgpt_engine
     Catch2::Catch2WithMain
 )
 
 include(Catch)
-catch_discover_tests(micrograd_tests)
+catch_discover_tests(microgpt_tests)

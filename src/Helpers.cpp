@@ -5,7 +5,7 @@
 #include <random>
 #include <unordered_set>
 
-namespace mg {
+namespace lmg {
 
 std::vector<std::string> parse_file(const std::filesystem::path &filename) {
   std::ifstream infile(filename, std::ios::in);
@@ -32,4 +32,4 @@ std::unordered_set<char> get_uchars(std::vector<std::string> docs) {
   return uc;
 }
 
-} // namespace mg
+} // namespace lmg

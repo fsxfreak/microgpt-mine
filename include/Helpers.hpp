@@ -6,7 +6,7 @@
 #include <unordered_set>
 #include <vector>
 
-namespace mg {
+namespace lmg {
 std::vector<std::string> parse_file(const std::filesystem::path &filename);
 std::unordered_set<char> get_uchars(std::vector<std::string> docs);
-} // namespace mg
+} // namespace lmg

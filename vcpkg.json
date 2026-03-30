@@ -1,5 +1,5 @@
 {
-  "name": "micrograd-mine",
+  "name": "microgpt-mine",
   "version": "1.0.0",
   "dependencies": [
     "fmt",
