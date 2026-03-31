@@ -1,7 +1,7 @@
 #include "Value.hpp"
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("Value math works correctly", "[math]") {
+TEST_CASE("test_value", "[math]") {
   auto a = std::make_shared<lmg::Value>(2.0);
   auto b = std::make_shared<lmg::Value>(3.0);
 

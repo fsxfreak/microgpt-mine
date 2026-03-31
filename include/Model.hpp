@@ -24,15 +24,7 @@ public:
   inline const ParamView &get_parameters() const { return params; }
 
   Vector gpt(const unsigned int token_id, const unsigned int pos_id,
-             Matrix &keys, Matrix &values);
-
-private:
-  Matrix wte;
-  Matrix wpe;
-  Matrix lm_head;
-
-  std::vector<Layer> layers;
-  ParamView params;
+             std::vector<Matrix> &keys, std::vector<Matrix> &values) const;
 
   // depth of transformer
   constexpr static unsigned int N_LAYER = 1;
@@ -43,5 +35,13 @@ private:
   // attention heads
   constexpr static unsigned int N_HEAD = 4;
   constexpr static unsigned int HEAD_DIM = N_EMBD / N_HEAD;
+
+private:
+  Matrix wte;
+  Matrix wpe;
+  Matrix lm_head;
+
+  std::vector<Layer> layers;
+  ParamView params;
 };
 } // namespace lmg

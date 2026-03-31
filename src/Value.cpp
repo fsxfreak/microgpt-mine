@@ -33,6 +33,7 @@ void Value::backward() {
 void Value::build_topo(
     const std::shared_ptr<Value> &v, std::vector<std::shared_ptr<Value>> &topo,
     std::unordered_set<std::shared_ptr<Value>, ValuePtrHash> &visited) {
+  // TODO build with std::stack iteratively instead of recursively
   if (visited.contains(v)) {
     return;
   }
