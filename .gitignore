@@ -106,3 +106,10 @@ Icon[
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Ignore the VS Code directory by default (personal settings, state, etc.)
+.vscode/*
+
+# EXCEPT for the shared debugging and task configurations!
+!.vscode/launch.json
+!.vscode/tasks.json
