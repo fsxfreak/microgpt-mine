@@ -1,13 +1,9 @@
 #pragma once
 
-#include "Value.hpp"
+#include "Types.hpp"
 #include <vector>
 
 namespace lmg {
-
-using Vector = std::vector<std::shared_ptr<Value>>;
-using Matrix = std::vector<Vector>;
-using ParamView = std::vector<Value *>;
 
 struct Layer {
   Matrix attn_wq;
@@ -27,9 +23,8 @@ public:
 
   inline const ParamView &get_parameters() const { return params; }
 
-  static Vector linear(const Vector &x, const Matrix &w);
-  static Vector softmax(const Vector &logits);
-  static Vector rmsnorm(const Vector &x);
+  Vector gpt(const unsigned int token_id, const unsigned int pos_id,
+             Matrix &keys, Matrix &values);
 
 private:
   Matrix wte;
