@@ -1,6 +1,7 @@
 #include "Value.hpp"
 
 #include <cassert>
+#include <cmath>
 #include <fmt/base.h>
 #include <ranges>
 #include <unordered_set>

@@ -7,29 +7,34 @@ TEST_CASE("Value math works correctly", "[math]") {
 
   SECTION("Value + Value") {
     auto c = a + b;
-    REQUIRE(c->getData() == 5.0);
+    REQUIRE(c->get_data() == 5.0);
     // Verify graph was built
-    REQUIRE(c->getChildren().size() == 2);
+    REQUIRE(c->get_children().size() == 2);
   }
 
   SECTION("Value + double") {
     auto c = a + 10.0;
-    REQUIRE(c->getData() == 12.0);
+    REQUIRE(c->get_data() == 12.0);
   }
 
   SECTION("double + Value (Reverse Operand)") {
     auto c = 10.0 + a;
-    REQUIRE(c->getData() == 12.0);
+    REQUIRE(c->get_data() == 12.0);
   }
 
   SECTION("Div works") {
     auto c = (a + b) / (b + a) + 1.0;
-    REQUIRE(c->getData() == 2.0);
+    REQUIRE(c->get_data() == 2.0);
+  }
+
+  SECTION("Exp works") {
+    auto c = a->exp();
+    REQUIRE(c->get_data() == std::exp(a->get_data()));
   }
 
   SECTION("Backward") {
     auto c = 5.0 * a;
     c->backward();
-    REQUIRE(a->getGrad() == 5.0);
+    REQUIRE(a->get_grad() == 5.0);
   }
 }

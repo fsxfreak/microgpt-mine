@@ -1,5 +1,6 @@
 #include "Helpers.hpp"
 
+#include <algorithm>
 #include <filesystem>
 #include <fstream>
 #include <random>

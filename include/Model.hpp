@@ -5,7 +5,8 @@
 
 namespace lmg {
 
-using Matrix = std::vector<std::vector<std::shared_ptr<Value>>>;
+using Vector = std::vector<std::shared_ptr<Value>>;
+using Matrix = std::vector<Vector>;
 using ParamView = std::vector<Value *>;
 
 struct Layer {
@@ -25,6 +26,10 @@ public:
   Model(size_t vocab_size);
 
   inline const ParamView &get_parameters() const { return params; }
+
+  static Vector linear(const Vector &x, const Matrix &w);
+  static Vector softmax(const Vector &logits);
+  static Vector rmsnorm(const Vector &x);
 
 private:
   Matrix wte;

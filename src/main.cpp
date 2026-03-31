@@ -36,6 +36,6 @@ int main() {
       break;
     }
 
-    fmt::println("{}", params.at(i)->getData());
+    fmt::println("{}", params.at(i)->get_data());
   }
 }

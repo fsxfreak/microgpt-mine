@@ -29,8 +29,8 @@ public:
 
   std::shared_ptr<Value> neg();
 
-  inline double getData() const { return data; }
-  inline double getGrad() const { return grad; }
+  inline double get_data() const { return data; }
+  inline double get_grad() const { return grad; }
   inline const std::vector<std::shared_ptr<Value>> &get_children() const {
     return children;
   }
@@ -73,6 +73,10 @@ inline std::shared_ptr<Value> operator*(double lhs,
 inline std::shared_ptr<Value> operator*(const std::shared_ptr<Value> &lhs,
                                         const double rhs) {
   return rhs * lhs;
+}
+inline std::shared_ptr<Value> operator-(const std::shared_ptr<Value> &lhs,
+                                        const std::shared_ptr<Value> &rhs) {
+  return lhs + rhs->neg();
 }
 inline std::shared_ptr<Value> operator-(const std::shared_ptr<Value> &lhs,
                                         const double rhs) {
