@@ -1,4 +1,5 @@
 #include "Helpers.hpp"
+#include "Types.hpp"
 
 #include <algorithm>
 #include <cassert>
@@ -7,7 +8,8 @@
 #include <numeric>
 #include <random>
 #include <ranges>
-#include <unordered_set>
+#include <set>
+#include <unordered_map>
 
 namespace lmg {
 
@@ -25,15 +27,23 @@ std::vector<std::string> parse_file(const std::filesystem::path &filename) {
   return docs;
 }
 
-std::unordered_set<char> get_uchars(std::vector<std::string> docs) {
-  std::unordered_set<char> uc;
+std::unordered_map<char, Token> get_uchars(std::vector<std::string> docs) {
+  std::set<char> uc;
   for (auto it = docs.begin(); it != docs.end(); ++it) {
     auto &s = *it;
     for (auto sit = s.begin(); sit != s.end(); ++sit) {
       uc.emplace(*sit);
     }
   }
-  return uc;
+
+  std::unordered_map<char, Token> uc_mapped;
+  size_t i = 0;
+  for (const auto &c : uc) {
+    // std set should order chars alphabetically - technically this doesn't
+    // matter, we just need a token assignment
+    uc_mapped[c] = i++;
+  }
+  return uc_mapped;
 }
 
 Vector linear(const Vector &x, const Matrix &w) {

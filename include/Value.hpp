@@ -14,6 +14,7 @@ public:
         std::vector<double> local_grads = {});
 
   void backward();
+  void update(const double data_delta);
 
   std::shared_ptr<Value> add(const std::shared_ptr<Value> &other);
   std::shared_ptr<Value> add(double value);

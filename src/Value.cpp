@@ -30,6 +30,11 @@ void Value::backward() {
   }
 }
 
+void Value::update(const double data_delta) {
+  data += data_delta;
+  grad = 0.0;
+}
+
 void Value::build_topo(
     const std::shared_ptr<Value> &v, std::vector<std::shared_ptr<Value>> &topo,
     std::unordered_set<std::shared_ptr<Value>, ValuePtrHash> &visited) {

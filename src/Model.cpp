@@ -59,7 +59,7 @@ ParamView Layer::parameters() const {
 }
 
 Model::Model(size_t vocab_size)
-    : wte(initialize_matrix(N_EMBD, N_EMBD)),
+    : wte(initialize_matrix(vocab_size, N_EMBD)),
       wpe(initialize_matrix(BLOCK_SIZE, N_EMBD)),
       lm_head(initialize_matrix(vocab_size, N_EMBD)) {
   layers.reserve(N_LAYER);
@@ -81,6 +81,8 @@ Model::Model(size_t vocab_size)
 Vector Model::gpt(const unsigned int token_id, const unsigned int pos_id,
                   std::vector<Matrix> &keys,
                   std::vector<Matrix> &values) const {
+  assert(keys.size() == N_LAYER);
+  assert(values.size() == N_LAYER);
   const auto &tok_emb = wte.at(token_id);
   const auto &pos_emb = wpe.at(pos_id);
   Vector x;

@@ -21,7 +21,7 @@ class Model {
 public:
   Model(size_t vocab_size);
 
-  inline const ParamView &get_parameters() const { return params; }
+  inline ParamView &get_parameters() { return params; }
 
   Vector gpt(const unsigned int token_id, const unsigned int pos_id,
              std::vector<Matrix> &keys, std::vector<Matrix> &values) const;
