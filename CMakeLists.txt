@@ -8,7 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF) # Disables compiler-specific hacks
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(fmt CONFIG REQUIRED)
-find_package(catch2 CONFIG REQUIRED)
+find_package(Catch2 CONFIG REQUIRED)
 
 add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 

@@ -10,6 +10,10 @@ constexpr std::string_view FILE_INPUT = "../data/names.txt";
 
 int main() {
   auto docs = lmg::parse_file(FILE_INPUT);
+  if (docs.size() == 0) {
+    fmt::println("No data, terminating");
+    return 0;
+  }
 
   std::cout << "have " << docs.size() << " docs" << std::endl;
   for (int i = 0; i < 5; i++) {
