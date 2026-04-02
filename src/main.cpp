@@ -23,4 +23,5 @@ int main() {
   lmg::Adam adam(docs, uchars, uchars.size());
   lmg::Model model(vocab_size);
   adam.train(model);
+  model.inference(uchars.size(), uchars);
 }

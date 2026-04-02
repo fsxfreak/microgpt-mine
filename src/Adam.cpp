@@ -63,8 +63,10 @@ void Adam::train(Model &model) {
       double update_delta = (lr_t * m_hat) / (std::pow(v_hat, 0.5) + EPS_ADAM);
       params[i]->update(-update_delta);
     }
-    fmt::println("step {:4d} / {:4d} | loss {:.4f}", step, num_steps,
-                 loss->get_data());
+    if (step % 50 == 0) {
+      fmt::println("step {:4d} / {:4d} | loss {:.4f}", step, num_steps,
+                   loss->get_data());
+    }
   }
 }
 } // namespace lmg

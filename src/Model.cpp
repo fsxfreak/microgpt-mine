@@ -171,4 +171,58 @@ Vector Model::gpt(const unsigned int token_id, const unsigned int pos_id,
   return logits;
 }
 
+std::unordered_map<Token, char>
+invert_char_map(const std::unordered_map<char, Token> &uchars) {
+  std::unordered_map<Token, char> result;
+  for (const auto [c, t] : uchars) {
+    assert(!result.contains(t));
+    result[t] = c;
+  }
+  return result;
+}
+
+Token weighted_sample(const Vector &probs, std::mt19937 &gen) {
+  std::vector<double> probs_data;
+  probs_data.reserve(probs_data.size());
+  std::transform(
+      probs.begin(), probs.end(), std::back_inserter(probs_data),
+      [](const std::shared_ptr<Value> &prob) { return prob->get_data(); });
+
+  std::discrete_distribution<> d(probs_data.begin(), probs_data.end());
+  return d(gen);
+}
+
+void Model::inference(const Token bos,
+                      const std::unordered_map<char, Token> &uchars,
+                      const double temperature,
+                      const size_t num_samples) const {
+  fmt::println("inference");
+
+  std::random_device rd;
+  std::mt19937 gen(rd());
+
+  auto token_map = invert_char_map(uchars);
+  for (size_t i = 0; i < num_samples; ++i) {
+    std::vector<Matrix> keys(N_LAYER);
+    std::vector<Matrix> values(N_LAYER);
+    Token token_id = bos;
+    std::vector<char> sample;
+    for (Token pos_id = 0; pos_id < BLOCK_SIZE; ++i) {
+      auto logits = gpt(token_id, pos_id, keys, values);
+      std::transform(logits.cbegin(), logits.cend(), logits.begin(),
+                     [temperature](const std::shared_ptr<Value> &logit) {
+                       return logit / temperature;
+                     });
+      auto probs = softmax(logits);
+      token_id = weighted_sample(probs, gen);
+      if (token_id == bos) {
+        break;
+      }
+      sample.push_back(token_map[token_id]);
+    }
+    std::string s{sample.begin(), sample.end()};
+    fmt::println("sample {}: {}", i, s);
+  }
+}
+
 } // namespace lmg

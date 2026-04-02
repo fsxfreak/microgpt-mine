@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Types.hpp"
+#include <unordered_map>
 #include <vector>
 
 namespace lmg {
@@ -25,6 +26,10 @@ public:
 
   Vector gpt(const unsigned int token_id, const unsigned int pos_id,
              std::vector<Matrix> &keys, std::vector<Matrix> &values) const;
+
+  void inference(const Token bos, const std::unordered_map<char, Token> &uchars,
+                 const double temperature = 0.5,
+                 const size_t num_samples = 20) const;
 
   // depth of transformer
   constexpr static unsigned int N_LAYER = 1;
