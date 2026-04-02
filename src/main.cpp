@@ -22,6 +22,10 @@ int main() {
 
   lmg::Adam adam(docs, uchars, uchars.size());
   lmg::Model model(vocab_size);
+  // todo implement saving model params
   adam.train(model);
-  model.inference(uchars.size(), uchars);
+  model.inference(uchars.size(), uchars, 0.8);
+  model.inference(uchars.size(), uchars, 0.5);
+  model.inference(uchars.size(), uchars, 0.25);
+  model.inference(uchars.size(), uchars, 0.1);
 }

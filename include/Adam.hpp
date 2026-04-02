@@ -13,6 +13,8 @@ public:
        const std::unordered_map<char, Token> &uchars, const Token bos,
        const unsigned int num_steps = DEFAULT_NUM_STEPS);
 
+  // todo - might be better to flip the deps here and have model take
+  // an optimizer for training
   void train(Model &model);
 
   constexpr static double LEARNING_RATE = 0.01;

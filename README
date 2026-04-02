@@ -1,3 +1,118 @@
-https://karpathy.github.io/2026/02/12/microgpt/
+# microgpt-mine
+https://karpathy.github.io/2026/02/12/microgpt/ https://karpathy.ai/microgpt.html
 
-https://karpathy.ai/microgpt.html
+My implementation of karpathy's microgpt in C++ for learning about GPTs and modernizing my C++ knowledge.
+
+## Sample output
+
+have 32033 docs
+sanjith
+lionardo
+tuleen
+izebella
+jayshon
+have 27 vocab size
+step    0 / 1000 | loss 218.3778
+step   50 / 1000 | loss 21.5936
+step  100 / 1000 | loss 9.3588
+step  150 / 1000 | loss 18.9810
+step  200 / 1000 | loss 24.6117
+step  250 / 1000 | loss 12.8474
+step  300 / 1000 | loss 10.6191
+step  350 / 1000 | loss 9.2084
+step  400 / 1000 | loss 6.3249
+step  450 / 1000 | loss 10.6180
+step  500 / 1000 | loss 6.4407
+step  550 / 1000 | loss 4.7593
+step  600 / 1000 | loss 2.0812
+step  650 / 1000 | loss 3.3798
+step  700 / 1000 | loss 6.8264
+step  750 / 1000 | loss 4.2693
+step  800 / 1000 | loss 9.2932
+step  850 / 1000 | loss 3.0259
+step  900 / 1000 | loss 4.4928
+step  950 / 1000 | loss 3.6665
+inference temp 0.8
+sample 0: zyneee
+sample 1: sada
+sample 2: n
+sample 3: eacja
+sample 4: mallerlh
+sample 5: dhener
+sample 6: cshan
+sample 7: gagilh
+sample 8: tshani
+sample 9: zyndee
+sample 10: reszd
+sample 11: zynlh
+sample 12: solalono
+sample 13: dh
+sample 14: n
+sample 15: skkay
+sample 16: ashamm
+sample 17: alaee
+sample 18: mirea
+sample 19: abenee
+inference temp 0.5
+sample 0: sana
+sample 1: b
+sample 2: alanee
+sample 3: silemm
+sample 4: sililon
+sample 5: sano
+sample 6: myhan
+sample 7: rane
+sample 8: elia
+sample 9: kaenni
+sample 10: ran
+sample 11: beli
+sample 12: beszda
+sample 13: alyni
+sample 14: beene
+sample 15: kan
+sample 16: kanli
+sample 17: joanc
+sample 18: kana
+sample 19: cria
+inference temp 0.25
+sample 0: zana
+sample 1: abanc
+sample 2: sana
+sample 3: amelynn
+sample 4: sagah
+sample 5: alanee
+sample 6: sana
+sample 7: zyna
+sample 8: sano
+sample 9: sana
+sample 10: sana
+sample 11: alanee
+sample 12: sana
+sample 13: mana
+sample 14: sana
+sample 15: sana
+sample 16: tana
+sample 17: siyni
+sample 18: sana
+sample 19: besss
+inference temp 0.1
+sample 0: sana
+sample 1: sana
+sample 2: kana
+sample 3: sana
+sample 4: sana
+sample 5: sana
+sample 6: sana
+sample 7: sana
+sample 8: sana
+sample 9: sana
+sample 10: sana
+sample 11: sana
+sample 12: sana
+sample 13: sana
+sample 14: sana
+sample 15: sana
+sample 16: sana
+sample 17: sana
+sample 18: sana
+sample 19: sana

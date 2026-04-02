@@ -196,7 +196,7 @@ void Model::inference(const Token bos,
                       const std::unordered_map<char, Token> &uchars,
                       const double temperature,
                       const size_t num_samples) const {
-  fmt::println("inference");
+  fmt::println("inference temp {}", temperature);
 
   std::random_device rd;
   std::mt19937 gen(rd());
@@ -207,7 +207,7 @@ void Model::inference(const Token bos,
     std::vector<Matrix> values(N_LAYER);
     Token token_id = bos;
     std::vector<char> sample;
-    for (Token pos_id = 0; pos_id < BLOCK_SIZE; ++i) {
+    for (Token pos_id = 0; pos_id < BLOCK_SIZE; ++pos_id) {
       auto logits = gpt(token_id, pos_id, keys, values);
       std::transform(logits.cbegin(), logits.cend(), logits.begin(),
                      [temperature](const std::shared_ptr<Value> &logit) {
